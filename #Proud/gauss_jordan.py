@@ -1,0 +1,175 @@
+" Gauss Jordan - Henry Lang "
+from fractions import Fraction
+from random import randrange
+
+
+def main():
+    # Defining Linear System of Equations
+    m = 2
+    n = 2
+    matrix = create_matrix(m, n)
+    coefficients = create_coefficients(m)
+    """ Manual definition ( Also possible with create_matrix() )
+    matrix = [
+        [a, b, c],
+        [d, e, f],
+        [g, h, i]
+    ]
+
+    coefficients = [x, y, z]
+    """
+
+    # Printing the matrix with coefficients
+    extended_matrix_print(matrix, coefficients)
+
+    # Using Gauss Jordan to solve the linear system of equations
+    gauss_jordan(matrix, coefficients)
+
+
+def create_matrix(rows: int, columns: int) -> list:
+    """Creates and initializes a matrix with the desired values
+
+    Args:
+        rows (int)
+        columns (int)
+
+    Returns:
+        list: The initialized matrix
+    """
+    matrix = []
+    for i in range(rows):
+        matrix.append(list())
+        for j in range(columns):
+            matrix[i].append(float(input(f"Elemento [{i},{j}]: ")));
+    
+    return matrix
+
+
+def create_random_matrix(rows: int, columns: int) -> list:
+    """Creates a matrix based on the amount of rows and columns desired.
+
+    Args:
+        rows (int)
+        columns (int)
+
+    Returns:
+        list: Matrix created.
+    """
+    matrix = []
+
+    for i in range(rows):
+        matrix.append(list())
+        for _ in range(columns):
+            matrix[i].append(randrange(-10, 10))
+
+    return matrix
+
+
+def create_coefficients(length: int) -> list:
+    """Creates a list of coefficients with the desired values.
+
+    Args:
+        length(int): List length.
+
+    Returns:
+        list: List of coefficients created.
+    """
+    coefficients = []
+
+    for i in range(length):
+        coefficients.append(float(input(f"Coefficient {i}:")))
+
+    return coefficients
+
+
+def create_random_coefficients(length: int) -> list:
+    """Creates a list of coefficients based on the amount of columns desired.
+
+    Args:
+        length(int): List length.
+
+    Returns:
+        list: List of coefficients created.
+    """
+    matrix = []
+
+    for i in range(length):
+        matrix.append(randrange(-10, 10))
+
+    return matrix
+
+
+def extended_matrix_print(matrix: list, coefficients: list) -> None:
+    """Prints the linear system of equations' extended matrix.
+
+    Args:
+        matrix (list).
+        coefficients (list).
+    """
+    element = coefficient = ""
+
+    # Printing matrix with each coefficient
+    for i in range(len(matrix)):
+        print("|", end=" ")
+        for j in range(len(matrix[i])):
+            # This transforms any given expression to a fraction, then cast it into a str to apply the desired format
+            element = str(Fraction(matrix[i][j]).limit_denominator())
+            print(f"{element:^3}".format(), end=" ")
+        coefficient = str(Fraction(coefficients[i]).limit_denominator())
+        print(f" | {coefficient:^8} |")
+
+    print()
+    return None
+
+
+def gauss_jordan(matrix: list, coefficients: list) -> None:
+    # Declaring temporary variables in case of a substitution
+    temp_row = []
+    temp_coefficient = 0.0
+    # Declaring scalar to pivot rows
+    scalar = 0.0
+
+    # Looping through each element of the matrix
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            # Operating only with pivots
+            if i == j:
+                # Replacing row if its pivot is equal to 0
+                if matrix[i][j] == 0:
+                    # Store the whole row in temporary variables
+                    temp_row = matrix[i]
+                    temp_coefficient = coefficients[i]
+                    # Looping through the matrix rows
+                    for m in range(len(matrix)):
+                        # If there's a pivot different to 0, replace rows.
+                        if matrix[m][j] != 0:
+                            matrix[i] = matrix[m]
+                            coefficients[i] = coefficients[m]
+                            matrix[m] = temp_row
+                            coefficients[m] = temp_coefficient
+                            break
+                        
+                # Making pivot equal to 1 and dividing rest of the row by its scalar
+                if matrix[i][j] != 1:
+                    divisor = matrix[i][j]
+                    for n in range(len(matrix[0])):
+                        matrix[i][n] /= divisor
+                    coefficients[i] /= divisor
+
+                # Reduce rest of the column under and above current row
+                for m in range(len(matrix)):
+                    if m != i:
+                        scalar = matrix[m][j]
+                        for n in range(len(matrix[m])):
+                            matrix[m][n] -= scalar * matrix[i][n]
+                        coefficients[m] -= scalar * coefficients[i]
+
+    # Printing resulting extended matrix
+    extended_matrix_print(matrix, coefficients)
+
+    return None
+
+
+# Executing main function
+if __name__ == "__main__":
+    main()
