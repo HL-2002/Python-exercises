@@ -20,14 +20,14 @@ def test_convert_zero():
 # Fuel gauge calc function
 def test_fuel_calc_empty():
     # Empty fuel gauge
-    for e in [x + 0.1 for x in range(0,10)]:
-        fuel_calc(e) == "E"
+    assert fuel_calc(0) == "E"
+    assert fuel_calc(1) == "E"
 
 
 def test_fuel_calc_full():
     # Full fuel gauge
-    for f in [x + 0.1 for x in range(99,119)]:
-        fuel_calc(f) == "F"
+    assert fuel_calc(99) == "F"
+    assert fuel_calc(100) == "F"
 
 def test_fuel_calc_other():
     # Other fuel gauge
