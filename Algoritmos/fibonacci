@@ -1,0 +1,14 @@
+def fibonacci(ls, n):
+    if len(ls) != n:
+        if len(ls) == 0:
+            ls.append(1)
+            fibonacci(ls,n)
+        elif len(ls) == 1:
+            ls.append(1)
+            fibonacci(ls,n)
+        else:
+            ls.append(ls[len(ls)-1] + ls[len(ls)-2])
+            fibonacci(ls,n)
+    return ls
+
+print(fibonacci(list(), 10))
