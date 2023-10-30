@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> Lo logramos muchachos </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="interface.js"></script>
+        <script type='text/javascript' src="/eel.js"></script>
+    </head>
+    <body>
+        <h1> PROPOSICIONES </h1>
+
+        <h2> Lista </h2>
+        <div class="contenido">
+            <input id="prop"placeholder=" El sol brilla">
+            <button onclick="agregar()"> Agregar </button>
+            <button onclick="autoIni()"> Automático </button>
+            <button id="reiniciador" onclick="reiniciar()"> Reiniciar </button>
+            <div id="propContainer">
+                <!-- div para proposición
+                <div id="proposicion">
+                    <h4>n</h4>
+                    <p>placeholder</p>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <h2> Operaciones</h2>
+        <div class="contenido">
+            <p> Operadores manuales (copia y pega)</p>
+            <p> Conjunción (^) | Disyunción (v) | Condicional (→) | Negación (~)</p>
+            <input placeholder=" Operación: ~(1^2)" id="operacionManual">
+            <button id="separador" onclick="manualExe()"> Manual </button>
+            <input placeholder=" Prop.: 1-Última prop." id="operacionAutomatica" type="number">
+            <button onclick="autoExe()"> Automático </button>
+            
+            <div id="operaciones">  
+                <!-- div para operacion manual
+                    <div class="bottom"> 
+                    <h4 class="resultado"> RESULTADO </h4>
+                    <p id="manual"> Ernesto juega fútbol y el sol brilla</p>
+                </div>
+                -->
+                
+                <!-- div para operaciones automáticas 
+                    <div class="operacion">
+                        <h4 class="resultado"> RESULTADOS </h4>
+                        <div class="grid">
+                            <div class="top">
+                                <h4 class="titulo">Conjunción</h4>
+                                <p id="union">Ernesto juega mucho y el sol brilla</p>
+                            </div>
+                            <div class="top">
+                                <h4 class="titulo">Disyunción</h4>
+                                <p id="interseccion">Ernesto juega mucho o el sol brilla</p>
+                            </div>
+                            <div class="top">
+                                <h4 class="titulo">Condicional</h4>
+                                <p id="diferencia">Si Ernesto juega mucho, entonces el sol brilla</p>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <h4 class="titulo">Negación</h4>
+                            <p id="complemento">No es cierto que Ernesto juega mucho</p>
+                        </div>
+                    </div>
+                -->
+                
+            </div>
+        </div>
+    </body>
+</html>
